@@ -1,0 +1,11 @@
+<div class="card mt-3">
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ task.text }}
+    </h5>
+    <p class="card-text">{{ task.day }}</p>
+    <button (click)="onDelete(task)" class="btn btn-outline-danger">
+      Remove <fa-icon [icon]="faRemove"></fa-icon>
+    </button>
+  </div>
+</div>

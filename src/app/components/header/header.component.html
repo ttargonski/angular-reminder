@@ -1,4 +1,8 @@
-<header>
+<header *ngIf="hasRoute('/')">
   <h1>{{ title }}</h1>
-  <app-button text="Add task" (btnClick)="btnToggle()"></app-button>
+  <app-button
+    text="{{ showAddTask ? 'Close form' : 'Add Task' }}"
+    className="{{ showAddTask ? 'btn btn-outline-danger' : 'btn btn-primary' }}"
+    (btnClick)="btnToggle()"
+  ></app-button>
 </header>

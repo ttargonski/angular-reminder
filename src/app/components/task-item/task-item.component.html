@@ -1,4 +1,8 @@
-<div class="card mt-3">
+<div
+  [ngClass]="{ reminder: task.reminder }"
+  class="card mt-3"
+  (dblclick)="onToggle(task)"
+>
   <div class="card-body">
     <h5 class="card-title">
       {{ task.text }}

@@ -1,0 +1,5 @@
+.reminder {
+  border: solid 4px;
+  border-color: var(--bs-success);
+  border-radius: var(--bs-card-border-radius);
+}

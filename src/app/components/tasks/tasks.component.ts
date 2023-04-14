@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../Task';
 
-//serivce
+//serivce - enabled //
 import { TasksService } from 'src/app/services/tasks.service';
 
 @Component({
@@ -15,24 +15,31 @@ export class TasksComponent implements OnInit {
   constructor(private taskService: TasksService) {}
 
   ngOnInit(): void {
-    //this.tasks = this.taskService.getTasks();
-    this.taskService.getTasks().subscribe((tasks) => (this.tasks = tasks));
+    //this.taskService.getTasks().subscribe((tasks) => (this.tasks = tasks));
+
+    this.tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
   }
 
   deleteItem(task: Task) {
-    this.taskService
-      .deleteTask(task)
-      .subscribe(
-        () => (this.tasks = this.tasks.filter((t) => t.id !== task.id))
-      );
+    // this.taskService
+    //   .deleteTask(task)
+    //   .subscribe(
+    //     () => (this.tasks = this.tasks.filter((t) => t.id !== task.id))
+    //   );
+    this.tasks = this.tasks.filter((t) => t.id !== task.id);
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 
   toggleReminder(task: Task) {
     task.reminder = !task.reminder;
-    this.taskService.updateTaskReminder(task).subscribe();
+    //this.taskService.updateTaskReminder(task).subscribe();
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 
   addTask(task: Task) {
-    this.taskService.addTask(task).subscribe((task) => this.tasks.push(task));
+    //this.taskService.addTask(task).subscribe((task) => this.tasks.push(task));
+    task.id = Date.now();
+    this.tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 }
